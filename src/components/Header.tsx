@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { FileText, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
 
 /**
  * Header component with navigation and branding
@@ -11,38 +12,38 @@ export const Header = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-primary-gradient rounded-lg flex items-center justify-center">
               <FileText className="w-5 h-5 text-white" />
             </div>
             <div className="font-bold text-xl text-foreground">
               FinTools<span className="text-primary">.AI</span>
             </div>
-          </div>
+          </Link>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#templates" className="text-foreground hover:text-primary transition-colors">
+            <Link to="/templates" className="text-foreground hover:text-primary transition-colors">
               Templates
-            </a>
-            <a href="#features" className="text-foreground hover:text-primary transition-colors">
+            </Link>
+            <a href="/#features" className="text-foreground hover:text-primary transition-colors">
               Features
             </a>
-            <a href="#pricing" className="text-foreground hover:text-primary transition-colors">
+            <Link to="/pricing" className="text-foreground hover:text-primary transition-colors">
               Pricing
-            </a>
-            <a href="#docs" className="text-foreground hover:text-primary transition-colors">
+            </Link>
+            <Link to="/api-docs" className="text-foreground hover:text-primary transition-colors">
               API Docs
-            </a>
+            </Link>
           </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className="hidden md:inline-flex">
-              Sign In
+            <Button variant="ghost" className="hidden md:inline-flex" asChild>
+              <Link to="/sign-in">Sign In</Link>
             </Button>
-            <Button variant="default">
-              Get Started
+            <Button variant="default" asChild>
+              <Link to="/get-started">Get Started</Link>
             </Button>
             <Button variant="ghost" size="sm" className="md:hidden">
               <Menu className="w-5 h-5" />
