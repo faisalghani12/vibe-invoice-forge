@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AppLayout } from "@/layouts/AppLayout";
 import Index from "./pages/Index";
 import Templates from "./pages/Templates";
 import Pricing from "./pages/Pricing";
@@ -20,16 +21,18 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/templates" element={<Templates />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/api-docs" element={<ApiDocs />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/get-started" element={<GetStarted />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AppLayout>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/templates" element={<Templates />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/api-docs" element={<ApiDocs />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/get-started" element={<GetStarted />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AppLayout>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
