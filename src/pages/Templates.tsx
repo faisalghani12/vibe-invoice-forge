@@ -1,17 +1,55 @@
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Search, Download, Eye, Star, Filter } from "lucide-react";
+import { InvoiceEditor } from "@/components/InvoiceEditor";
+import { generateInvoicePDF, sampleInvoiceData } from "@/services/pdfGenerator";
+import { Search, Download, Eye, Star, Filter, Edit } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 /**
  * Templates page showcasing all available invoice templates
  * Features search, filtering, and template preview capabilities
  */
 const Templates = () => {
+  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleQuickGenerate = async (templateName: string) => {
+    try {
+      const result = await generateInvoicePDF(sampleInvoiceData, `${templateName.toLowerCase().replace(/\s+/g, '-')}-invoice.pdf`);
+      if (result.success) {
+        toast({
+          title: "Success!",
+          description: `${templateName} invoice generated and downloaded successfully.`,
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: result.error || "Failed to generate PDF",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleCustomize = (templateName: string) => {
+    setSelectedTemplate(templateName);
+    setIsEditorOpen(true);
+  };
+
   const templates = [
     {
       id: 1,
@@ -182,16 +220,25 @@ const Templates = () => {
                     </p>
                   </CardContent>
                   
-                  <CardFooter className="p-6 pt-0 flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <Eye className="w-4 h-4 mr-2" />
-                      Preview
-                    </Button>
-                    <Button size="sm" className="flex-1">
-                      <Download className="w-4 h-4 mr-2" />
-                      Use Template
-                    </Button>
-                  </CardFooter>
+                   <CardFooter className="p-6 pt-0 flex gap-2">
+                     <Button 
+                       variant="outline" 
+                       size="sm" 
+                       className="flex-1"
+                       onClick={() => handleQuickGenerate(template.name)}
+                     >
+                       <Download className="w-4 h-4 mr-2" />
+                       Quick Generate
+                     </Button>
+                     <Button 
+                       size="sm" 
+                       className="flex-1"
+                       onClick={() => handleCustomize(template.name)}
+                     >
+                       <Edit className="w-4 h-4 mr-2" />
+                       Customize
+                     </Button>
+                   </CardFooter>
                 </Card>
               ))}
             </div>
@@ -207,6 +254,21 @@ const Templates = () => {
       </main>
       
       <Footer />
+
+      {/* Invoice Editor Dialog */}
+      <Dialog open={isEditorOpen} onOpenChange={setIsEditorOpen}>
+        <DialogContent className="max-w-[95vw] max-h-[95vh] overflow-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {selectedTemplate ? `Customize ${selectedTemplate}` : 'Create Invoice'}
+            </DialogTitle>
+          </DialogHeader>
+          <InvoiceEditor 
+            template={selectedTemplate || undefined}
+            onClose={() => setIsEditorOpen(false)}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
