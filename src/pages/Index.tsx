@@ -131,30 +131,26 @@ const Index = () => {
         </p>
       </div>
 
-      {/* Quick Actions & Stats Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <div className="lg:col-span-1">
-          <QuickActions />
-        </div>
-        <div className="lg:col-span-3">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {stats.map((stat, index) => (
-              <Card key={index} className="text-center">
-                <CardContent className="p-4">
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-10 h-10 bg-primary-gradient rounded-lg flex items-center justify-center text-white">
-                      <stat.icon className="w-5 h-5" />
-                    </div>
-                    <div className="space-y-1">
-                      <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-                      <div className="text-xs text-muted-foreground">{stat.label}</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+      {/* Quick Actions */}
+      <QuickActions />
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {stats.map((stat, index) => (
+          <Card key={index} className="text-center">
+            <CardContent className="p-4">
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-10 h-10 bg-primary-gradient rounded-lg flex items-center justify-center text-white">
+                  <stat.icon className="w-5 h-5" />
+                </div>
+                <div className="space-y-1">
+                  <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground">{stat.label}</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
       {/* Tools Grid */}
