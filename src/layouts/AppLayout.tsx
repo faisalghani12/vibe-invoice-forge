@@ -1,52 +1,119 @@
 import React from "react";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
-import { Bell, Search, User } from "lucide-react";
+import { Bell, Search, User, FileText, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Link, useLocation } from "react-router-dom";
 
 interface AppLayoutProps {
   children: React.ReactNode;
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const location = useLocation();
+
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/templates", label: "Templates" },
+    { to: "/pricing", label: "Pricing" },
+    { to: "/api-docs", label: "API Docs" },
+  ];
+
+  const isActive = (path: string) => location.pathname === path;
+
   return (
-    <SidebarProvider defaultOpen>
-      <div className="min-h-screen flex w-full bg-background">
-        <AppSidebar />
-        
-        <div className="flex-1 flex flex-col">
-          {/* Top Header */}
-          <header className="h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-            <div className="flex items-center justify-between h-full px-6">
-              <div className="flex items-center gap-4">
-                <SidebarTrigger />
-                <div className="relative max-w-md w-full">
+    <div className="min-h-screen bg-background">
+      {/* Navigation Header */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between px-6">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-primary-gradient rounded-lg flex items-center justify-center">
+              <FileText className="w-4 h-4 text-white" />
+            </div>
+            <div className="font-bold text-lg text-foreground">
+              FinTools<span className="text-primary">.AI</span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  isActive(link.to) ? "text-primary" : "text-muted-foreground"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Search and Actions */}
+          <div className="flex items-center gap-3">
+            <div className="relative hidden sm:block max-w-sm w-full">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <Input 
+                placeholder="Search tools..." 
+                className="pl-10 bg-muted/30 w-full"
+              />
+            </div>
+            
+            <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
+              <Bell className="w-4 h-4" />
+            </Button>
+            <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
+              <User className="w-4 h-4" />
+            </Button>
+            
+            {/* Mobile Menu Button */}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <Menu className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t bg-background">
+            <nav className="container px-6 py-4 space-y-3">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`block text-sm font-medium transition-colors hover:text-primary ${
+                    isActive(link.to) ? "text-primary" : "text-muted-foreground"
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="pt-3 border-t">
+                <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
                   <Input 
-                    placeholder="Search tools, templates..." 
+                    placeholder="Search tools..." 
                     className="pl-10 bg-muted/30"
                   />
                 </div>
               </div>
-              
-              <div className="flex items-center gap-3">
-                <Button variant="ghost" size="sm">
-                  <Bell className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm">
-                  <User className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </header>
+            </nav>
+          </div>
+        )}
+      </header>
 
-          {/* Main Content */}
-          <main className="flex-1 overflow-auto">
-            {children}
-          </main>
-        </div>
-      </div>
-    </SidebarProvider>
+      {/* Main Content */}
+      <main className="flex-1">
+        {children}
+      </main>
+    </div>
   );
 }
