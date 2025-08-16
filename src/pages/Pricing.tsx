@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import { Check, X, Zap, Crown, Users } from "lucide-react";
 
 /**
@@ -80,10 +78,7 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="min-h-screen">
-      <Header />
-      
-      <main className="pt-16">
+    <main>
         {/* Hero Section */}
         <section className="bg-hero-gradient py-24">
           <div className="container mx-auto px-6">
@@ -212,9 +207,6 @@ const Pricing = () => {
           </div>
         </section>
       </main>
-      
-      <Footer />
-    </div>
   );
 };
 

@@ -2,8 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import { Code, BookOpen, Zap, Shield, Globe, Database } from "lucide-react";
 
 /**
@@ -62,10 +60,7 @@ const ApiDocs = () => {
   ];
 
   return (
-    <div className="min-h-screen">
-      <Header />
-      
-      <main className="pt-16">
+    <main>
         {/* Hero Section */}
         <section className="bg-hero-gradient py-24">
           <div className="container mx-auto px-6">
@@ -291,9 +286,6 @@ templates = response.json()`}
           </div>
         </section>
       </main>
-      
-      <Footer />
-    </div>
   );
 };
 
