@@ -211,18 +211,18 @@ const Templates = () => {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="flex-1"
+                  className="flex-1 justify-center"
                   onClick={() => handleQuickGenerate(template.name)}
                 >
-                  <Download className="w-4 h-4 mr-2" />
+                  <Download className="w-4 h-4" />
                   Quick Generate
                 </Button>
                 <Button 
                   size="sm" 
-                  className="flex-1"
+                  className="flex-1 justify-center"
                   onClick={() => handleCustomize(template.name)}
                 >
-                  <Edit className="w-4 h-4 mr-2" />
+                  <Edit className="w-4 h-4" />
                   Customize
                 </Button>
               </CardFooter>
