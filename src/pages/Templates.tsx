@@ -9,7 +9,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { InvoiceEditor } from "@/components/InvoiceEditor";
 import { generateInvoicePDF, sampleInvoiceData } from "@/services/pdfGenerator";
-import { Search, Download, Eye, Star, Filter, Edit } from "lucide-react";
+import { Search, Eye, Star, Filter, Edit } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 /**
@@ -19,30 +19,13 @@ import { useToast } from "@/hooks/use-toast";
 const Templates = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [previewTemplate, setPreviewTemplate] = useState<any>(null);
   const { toast } = useToast();
 
-  const handleQuickGenerate = async (templateName: string) => {
-    try {
-      const result = await generateInvoicePDF(sampleInvoiceData, `${templateName.toLowerCase().replace(/\s+/g, '-')}-invoice.pdf`);
-      if (result.success) {
-        toast({
-          title: "Success!",
-          description: `${templateName} invoice generated and downloaded successfully.`,
-        });
-      } else {
-        toast({
-          title: "Error",
-          description: result.error || "Failed to generate PDF",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred",
-        variant: "destructive",
-      });
-    }
+  const handlePreview = (template: any) => {
+    setPreviewTemplate(template);
+    setIsPreviewOpen(true);
   };
 
   const handleCustomize = (templateName: string) => {
@@ -212,10 +195,10 @@ const Templates = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex-1 justify-center"
-                  onClick={() => handleQuickGenerate(template.name)}
+                  onClick={() => handlePreview(template)}
                 >
-                  <Download className="w-4 h-4" />
-                  Quick Generate
+                  <Eye className="w-4 h-4" />
+                  Preview
                 </Button>
                 <Button 
                   size="sm" 
@@ -236,6 +219,56 @@ const Templates = () => {
             Load More Templates
           </Button>
         </div>
+
+      {/* Preview Dialog */}
+      <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {previewTemplate ? `Preview: ${previewTemplate.name}` : 'Template Preview'}
+            </DialogTitle>
+          </DialogHeader>
+          {previewTemplate && (
+            <div className="space-y-4">
+              <div className="aspect-[3/4] bg-muted rounded-lg overflow-hidden">
+                <img 
+                  src={previewTemplate.preview} 
+                  alt={`Preview of ${previewTemplate.name}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold">{previewTemplate.name}</h3>
+                <div className="flex gap-2">
+                  <Badge variant="outline">{previewTemplate.category}</Badge>
+                  <Badge variant={previewTemplate.price === "Free" ? "secondary" : "default"}>
+                    {previewTemplate.price}
+                  </Badge>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {previewTemplate.tags.map((tag: string) => (
+                    <Badge key={tag} variant="secondary" className="text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+                <div className="flex gap-4 pt-4">
+                  <Button 
+                    onClick={() => {
+                      setIsPreviewOpen(false);
+                      handleCustomize(previewTemplate.name);
+                    }}
+                    className="flex-1"
+                  >
+                    <Edit className="w-4 h-4 mr-2" />
+                    Customize This Template
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Invoice Editor Dialog */}
       <Dialog open={isEditorOpen} onOpenChange={setIsEditorOpen}>
