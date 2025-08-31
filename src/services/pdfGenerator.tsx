@@ -2,8 +2,8 @@ import React from 'react';
 import { Document, Page, Text, View, StyleSheet, pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 
-// PDF styles using a professional invoice design
-const styles = StyleSheet.create({
+// Professional template styles
+const professionalStyles = StyleSheet.create({
   page: {
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
@@ -35,6 +35,192 @@ const styles = StyleSheet.create({
     color: '#1F2937',
     marginBottom: 10,
   },
+});
+
+// Creative template styles
+const creativeStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#FAFAFF',
+    padding: 30,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 40,
+    backgroundColor: '#8B5CF6',
+    padding: 20,
+    marginTop: -30,
+    marginLeft: -30,
+    marginRight: -30,
+    borderRadius: 0,
+  },
+  logo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+  companyInfo: {
+    fontSize: 10,
+    color: '#F3F4F6',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#8B5CF6',
+    marginBottom: 10,
+  },
+});
+
+// Minimalist template styles
+const minimalistStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#FFFFFF',
+    padding: 40,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 60,
+    paddingBottom: 10,
+  },
+  logo: {
+    fontSize: 20,
+    fontWeight: 'normal',
+    color: '#000000',
+  },
+  companyInfo: {
+    fontSize: 9,
+    color: '#666666',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 24,
+    fontWeight: 'normal',
+    color: '#000000',
+    marginBottom: 5,
+    letterSpacing: 2,
+  },
+});
+
+// Tech template styles
+const techStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#0F172A',
+    padding: 30,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 40,
+    borderBottom: 1,
+    borderBottomColor: '#00D9FF',
+    paddingBottom: 20,
+  },
+  logo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#00D9FF',
+  },
+  companyInfo: {
+    fontSize: 10,
+    color: '#94A3B8',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 10,
+  },
+});
+
+// Consulting template styles
+const consultingStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#FFFFFF',
+    padding: 35,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 45,
+    borderBottom: 3,
+    borderBottomColor: '#1E3A8A',
+    paddingBottom: 20,
+  },
+  logo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#1E3A8A',
+  },
+  companyInfo: {
+    fontSize: 10,
+    color: '#475569',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#1E3A8A',
+    marginBottom: 10,
+  },
+});
+
+// E-commerce template styles
+const ecommerceStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#FFFFFF',
+    padding: 30,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 40,
+    borderBottom: 2,
+    borderBottomColor: '#059669',
+    paddingBottom: 20,
+    backgroundColor: '#F0FDF4',
+    padding: 20,
+    marginTop: -30,
+    marginLeft: -30,
+    marginRight: -30,
+  },
+  logo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#059669',
+  },
+  companyInfo: {
+    fontSize: 10,
+    color: '#065F46',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#059669',
+    marginBottom: 10,
+  },
+});
+
+// Common styles for all templates (shared components)
+const getCommonStyles = (primaryColor: string, backgroundColor: string = '#FFFFFF', textColor: string = '#1F2937') => StyleSheet.create({
   invoiceNumber: {
     fontSize: 14,
     color: '#6B7280',
@@ -46,7 +232,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: textColor,
     marginBottom: 10,
     borderBottom: 1,
     borderBottomColor: '#E5E7EB',
@@ -64,7 +250,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: '#374151',
+    color: textColor,
     marginBottom: 5,
   },
   value: {
@@ -90,18 +276,18 @@ const styles = StyleSheet.create({
   tableCell: {
     flex: 1,
     fontSize: 10,
-    color: '#374151',
+    color: textColor,
   },
   tableCellHeader: {
     flex: 1,
     fontSize: 11,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: textColor,
   },
   tableCellRight: {
     flex: 1,
     fontSize: 10,
-    color: '#374151',
+    color: textColor,
     textAlign: 'right',
   },
   total: {
@@ -117,11 +303,11 @@ const styles = StyleSheet.create({
   },
   totalLabel: {
     fontSize: 12,
-    color: '#374151',
+    color: textColor,
   },
   totalValue: {
     fontSize: 12,
-    color: '#374151',
+    color: textColor,
   },
   grandTotal: {
     flexDirection: 'row',
@@ -129,17 +315,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingTop: 10,
     borderTop: 2,
-    borderTopColor: '#6366F1',
+    borderTopColor: primaryColor,
   },
   grandTotalLabel: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: textColor,
   },
   grandTotalValue: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#6366F1',
+    color: primaryColor,
   },
   footer: {
     position: 'absolute',
@@ -154,6 +340,44 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 });
+
+// Template style mapping
+const getTemplateStyles = (templateId: string) => {
+  const styleMap: any = {
+    professional: { 
+      main: professionalStyles, 
+      common: getCommonStyles('#6366F1'), 
+      colors: { primary: '#6366F1', bg: '#FFFFFF', text: '#1F2937' } 
+    },
+    creative: { 
+      main: creativeStyles, 
+      common: getCommonStyles('#8B5CF6', '#FAFAFF'), 
+      colors: { primary: '#8B5CF6', bg: '#FAFAFF', text: '#1F2937' } 
+    },
+    minimalist: { 
+      main: minimalistStyles, 
+      common: getCommonStyles('#000000'), 
+      colors: { primary: '#000000', bg: '#FFFFFF', text: '#000000' } 
+    },
+    tech: { 
+      main: techStyles, 
+      common: getCommonStyles('#00D9FF', '#0F172A', '#FFFFFF'), 
+      colors: { primary: '#00D9FF', bg: '#0F172A', text: '#FFFFFF' } 
+    },
+    consulting: { 
+      main: consultingStyles, 
+      common: getCommonStyles('#1E3A8A'), 
+      colors: { primary: '#1E3A8A', bg: '#FFFFFF', text: '#1E3A8A' } 
+    },
+    ecommerce: { 
+      main: ecommerceStyles, 
+      common: getCommonStyles('#059669'), 
+      colors: { primary: '#059669', bg: '#FFFFFF', text: '#1F2937' } 
+    },
+  };
+  
+  return styleMap[templateId] || styleMap.professional;
+};
 
 // Invoice data interface
 export interface InvoiceData {
@@ -186,101 +410,106 @@ export interface InvoiceData {
 }
 
 // PDF Document Component
-const InvoicePDF: React.FC<{ data: InvoiceData }> = ({ data }) => (
-  <Document>
-    <Page size="A4" style={styles.page}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.logo}>FinTools.AI</Text>
-          <Text style={styles.companyInfo}>Professional Invoice Generator</Text>
-        </View>
-        <View style={styles.companyInfo}>
-          <Text>{data.from.name}</Text>
-          <Text>{data.from.address}</Text>
-          <Text>{data.from.city}</Text>
-          <Text>{data.from.email}</Text>
-          <Text>{data.from.phone}</Text>
-        </View>
-      </View>
-
-      {/* Invoice Title */}
-      <Text style={styles.invoiceTitle}>INVOICE</Text>
-      <Text style={styles.invoiceNumber}>#{data.invoiceNumber}</Text>
-
-      {/* Invoice Details */}
-      <View style={styles.row}>
-        <View style={styles.column}>
-          <Text style={styles.label}>Bill To:</Text>
-          <Text style={styles.value}>{data.to.name}</Text>
-          <Text style={styles.value}>{data.to.address}</Text>
-          <Text style={styles.value}>{data.to.city}</Text>
-          <Text style={styles.value}>{data.to.email}</Text>
-        </View>
-        <View style={styles.column}>
-          <View style={{ alignItems: 'flex-end' }}>
-            <Text style={styles.label}>Invoice Date:</Text>
-            <Text style={styles.value}>{data.date}</Text>
-            <Text style={styles.label}>Due Date:</Text>
-            <Text style={styles.value}>{data.dueDate}</Text>
+const InvoicePDF: React.FC<{ data: InvoiceData; templateId?: string }> = ({ data, templateId = 'professional' }) => {
+  const templateStyles = getTemplateStyles(templateId);
+  const styles = { ...templateStyles.main, ...templateStyles.common };
+  
+  return (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        {/* Header */}
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.logo}>FinTools.AI</Text>
+            <Text style={styles.companyInfo}>Professional Invoice Generator</Text>
+          </View>
+          <View style={styles.companyInfo}>
+            <Text>{data.from.name}</Text>
+            <Text>{data.from.address}</Text>
+            <Text>{data.from.city}</Text>
+            <Text>{data.from.email}</Text>
+            <Text>{data.from.phone}</Text>
           </View>
         </View>
-      </View>
 
-      {/* Items Table */}
-      <View style={styles.table}>
-        <View style={styles.tableHeader}>
-          <Text style={styles.tableCellHeader}>Description</Text>
-          <Text style={styles.tableCellHeader}>Qty</Text>
-          <Text style={styles.tableCellHeader}>Rate</Text>
-          <Text style={styles.tableCellHeader}>Amount</Text>
-        </View>
-        {data.items.map((item, index) => (
-          <View key={index} style={styles.tableRow}>
-            <Text style={styles.tableCell}>{item.description}</Text>
-            <Text style={styles.tableCell}>{item.quantity}</Text>
-            <Text style={styles.tableCell}>${item.rate.toFixed(2)}</Text>
-            <Text style={styles.tableCellRight}>${item.amount.toFixed(2)}</Text>
+        {/* Invoice Title */}
+        <Text style={styles.invoiceTitle}>INVOICE</Text>
+        <Text style={styles.invoiceNumber}>#{data.invoiceNumber}</Text>
+
+        {/* Invoice Details */}
+        <View style={styles.row}>
+          <View style={styles.column}>
+            <Text style={styles.label}>Bill To:</Text>
+            <Text style={styles.value}>{data.to.name}</Text>
+            <Text style={styles.value}>{data.to.address}</Text>
+            <Text style={styles.value}>{data.to.city}</Text>
+            <Text style={styles.value}>{data.to.email}</Text>
           </View>
-        ))}
-      </View>
+          <View style={styles.column}>
+            <View style={{ alignItems: 'flex-end' }}>
+              <Text style={styles.label}>Invoice Date:</Text>
+              <Text style={styles.value}>{data.date}</Text>
+              <Text style={styles.label}>Due Date:</Text>
+              <Text style={styles.value}>{data.dueDate}</Text>
+            </View>
+          </View>
+        </View>
 
-      {/* Totals */}
-      <View style={styles.total}>
-        <View style={styles.totalRow}>
-          <Text style={styles.totalLabel}>Subtotal:</Text>
-          <Text style={styles.totalValue}>${data.subtotal.toFixed(2)}</Text>
+        {/* Items Table */}
+        <View style={styles.table}>
+          <View style={styles.tableHeader}>
+            <Text style={styles.tableCellHeader}>Description</Text>
+            <Text style={styles.tableCellHeader}>Qty</Text>
+            <Text style={styles.tableCellHeader}>Rate</Text>
+            <Text style={styles.tableCellHeader}>Amount</Text>
+          </View>
+          {data.items.map((item, index) => (
+            <View key={index} style={styles.tableRow}>
+              <Text style={styles.tableCell}>{item.description}</Text>
+              <Text style={styles.tableCell}>{item.quantity}</Text>
+              <Text style={styles.tableCell}>${item.rate.toFixed(2)}</Text>
+              <Text style={styles.tableCellRight}>${item.amount.toFixed(2)}</Text>
+            </View>
+          ))}
         </View>
-        <View style={styles.totalRow}>
-          <Text style={styles.totalLabel}>Tax:</Text>
-          <Text style={styles.totalValue}>${data.tax.toFixed(2)}</Text>
-        </View>
-        <View style={styles.grandTotal}>
-          <Text style={styles.grandTotalLabel}>Total:</Text>
-          <Text style={styles.grandTotalValue}>${data.total.toFixed(2)}</Text>
-        </View>
-      </View>
 
-      {/* Notes */}
-      {data.notes && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Notes</Text>
-          <Text style={styles.value}>{data.notes}</Text>
+        {/* Totals */}
+        <View style={styles.total}>
+          <View style={styles.totalRow}>
+            <Text style={styles.totalLabel}>Subtotal:</Text>
+            <Text style={styles.totalValue}>${data.subtotal.toFixed(2)}</Text>
+          </View>
+          <View style={styles.totalRow}>
+            <Text style={styles.totalLabel}>Tax:</Text>
+            <Text style={styles.totalValue}>${data.tax.toFixed(2)}</Text>
+          </View>
+          <View style={styles.grandTotal}>
+            <Text style={styles.grandTotalLabel}>Total:</Text>
+            <Text style={styles.grandTotalValue}>${data.total.toFixed(2)}</Text>
+          </View>
         </View>
-      )}
 
-      {/* Footer */}
-      <Text style={styles.footer}>
-        Thank you for your business! Generated with FinTools.AI Invoice Generator
-      </Text>
-    </Page>
-  </Document>
-);
+        {/* Notes */}
+        {data.notes && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Notes</Text>
+            <Text style={styles.value}>{data.notes}</Text>
+          </View>
+        )}
+
+        {/* Footer */}
+        <Text style={styles.footer}>
+          Thank you for your business! Generated with FinTools.AI Invoice Generator
+        </Text>
+      </Page>
+    </Document>
+  );
+};
 
 // Generate and download PDF
-export const generateInvoicePDF = async (data: InvoiceData, filename?: string) => {
+export const generateInvoicePDF = async (data: InvoiceData, filename?: string, templateId?: string) => {
   try {
-    const blob = await pdf(<InvoicePDF data={data} />).toBlob();
+    const blob = await pdf(<InvoicePDF data={data} templateId={templateId} />).toBlob();
     saveAs(blob, filename || `invoice-${data.invoiceNumber}.pdf`);
     return { success: true };
   } catch (error) {

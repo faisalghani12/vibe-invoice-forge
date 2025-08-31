@@ -12,6 +12,14 @@ import { generateInvoicePDF, sampleInvoiceData } from "@/services/pdfGenerator";
 import { Search, Eye, Star, Filter, Edit } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+// Template preview images
+import professionalTemplate from "@/assets/template-professional.jpg";
+import creativeTemplate from "@/assets/template-creative.jpg";
+import minimalistTemplate from "@/assets/template-minimalist.jpg";
+import techTemplate from "@/assets/template-tech.jpg";
+import consultingTemplate from "@/assets/template-consulting.jpg";
+import ecommerceTemplate from "@/assets/template-ecommerce.jpg";
+
 /**
  * Templates page showcasing all available invoice templates
  * Features search, filtering, and template preview capabilities
@@ -36,61 +44,67 @@ const Templates = () => {
   const templates = [
     {
       id: 1,
+      templateId: "professional",
       name: "Professional Business",
       category: "Business",
       rating: 4.8,
       downloads: 15420,
-      preview: "/placeholder.svg",
+      preview: professionalTemplate,
       tags: ["Clean", "Modern", "Corporate"],
       price: "Free"
     },
     {
       id: 2,
+      templateId: "creative",
       name: "Creative Agency",
       category: "Creative",
       rating: 4.9,
       downloads: 12340,
-      preview: "/placeholder.svg",
+      preview: creativeTemplate,
       tags: ["Colorful", "Bold", "Agency"],
       price: "Premium"
     },
     {
       id: 3,
+      templateId: "minimalist",
       name: "Minimalist",
       category: "Simple",
       rating: 4.7,
       downloads: 18650,
-      preview: "/placeholder.svg",
+      preview: minimalistTemplate,
       tags: ["Clean", "Simple", "Elegant"],
       price: "Free"
     },
     {
       id: 4,
+      templateId: "tech",
       name: "Tech Startup",
       category: "Technology",
       rating: 4.6,
       downloads: 9870,
-      preview: "/placeholder.svg",
+      preview: techTemplate,
       tags: ["Modern", "Tech", "Startup"],
       price: "Premium"
     },
     {
       id: 5,
+      templateId: "consulting",
       name: "Consulting",
       category: "Professional",
       rating: 4.8,
       downloads: 11230,
-      preview: "/placeholder.svg",
+      preview: consultingTemplate,
       tags: ["Professional", "Consulting", "Clean"],
       price: "Free"
     },
     {
       id: 6,
+      templateId: "ecommerce",
       name: "E-commerce",
       category: "Retail",
       rating: 4.5,
       downloads: 7890,
-      preview: "/placeholder.svg",
+      preview: ecommerceTemplate,
       tags: ["Retail", "Product", "Sales"],
       price: "Premium"
     }

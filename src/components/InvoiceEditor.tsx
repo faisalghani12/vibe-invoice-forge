@@ -111,8 +111,23 @@ export const InvoiceEditor: React.FC<InvoiceEditorProps> = ({ template, onClose 
 
   const handleGeneratePDF = async () => {
     setIsGenerating(true);
+    
     try {
-      const result = await generateInvoicePDF(invoiceData);
+      // Map template names to template IDs
+      const templateIdMap: { [key: string]: string } = {
+        'Professional Business': 'professional',
+        'Creative Agency': 'creative',
+        'Minimalist': 'minimalist',
+        'Tech Startup': 'tech',
+        'Consulting': 'consulting',
+        'E-commerce': 'ecommerce',
+      };
+      
+      const templateId = template ? templateIdMap[template] || 'professional' : 'professional';
+      const filename = `${template ? template.toLowerCase().replace(/\s+/g, '-') : 'professional'}-invoice.pdf`;
+      
+      const result = await generateInvoicePDF(invoiceData, filename, templateId);
+      
       if (result.success) {
         toast({
           title: "Success!",
