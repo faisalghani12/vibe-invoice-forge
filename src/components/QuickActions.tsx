@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Upload, Zap, BarChart3 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { QuickCalculator } from "./QuickCalculator";
 
 export function QuickActions() {
   const navigate = useNavigate();
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
 
   const quickActions = [
     {
@@ -27,7 +29,7 @@ export function QuickActions() {
       title: "Quick Calculate",
       description: "Fast pricing calculations", 
       icon: Zap,
-      action: () => navigate("/pricing"),
+      action: () => setIsCalculatorOpen(true),
       variant: "accent"
     },
     {
@@ -71,6 +73,11 @@ export function QuickActions() {
           ))}
         </div>
       </CardContent>
+
+      <QuickCalculator 
+        open={isCalculatorOpen} 
+        onOpenChange={setIsCalculatorOpen} 
+      />
     </Card>
   );
 }
