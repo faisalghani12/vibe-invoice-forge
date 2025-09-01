@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,6 +21,35 @@ export const InvoiceEditor: React.FC<InvoiceEditorProps> = ({ template, onClose 
   const [invoiceData, setInvoiceData] = useState<InvoiceData>(sampleInvoiceData);
   const [isGenerating, setIsGenerating] = useState(false);
   const { toast } = useToast();
+
+  // Load calculation data from localStorage if available
+  useEffect(() => {
+    const storedCalculationData = localStorage.getItem('quickCalculationData');
+    if (storedCalculationData) {
+      try {
+        const calculationData = JSON.parse(storedCalculationData);
+        
+        // Update invoice data with calculation data
+        setInvoiceData(prev => ({
+          ...prev,
+          items: calculationData.items,
+          subtotal: calculationData.subtotal,
+          tax: calculationData.taxAmount,
+          total: calculationData.total
+        }));
+        
+        // Clear the stored data after loading
+        localStorage.removeItem('quickCalculationData');
+        
+        toast({
+          title: "Calculation Loaded",
+          description: "Your calculation has been loaded into the invoice editor."
+        });
+      } catch (error) {
+        console.error('Failed to load calculation data:', error);
+      }
+    }
+  }, [toast]);
 
   const handleInputChange = (field: string, value: string) => {
     setInvoiceData(prev => ({
@@ -113,18 +142,8 @@ export const InvoiceEditor: React.FC<InvoiceEditorProps> = ({ template, onClose 
     setIsGenerating(true);
     
     try {
-      // Map template names to template IDs
-      const templateIdMap: { [key: string]: string } = {
-        'Professional Business': 'professional',
-        'Creative Agency': 'creative',
-        'Minimalist': 'minimalist',
-        'Tech Startup': 'tech',
-        'Consulting': 'consulting',
-        'E-commerce': 'ecommerce',
-      };
-      
-      const templateId = template ? templateIdMap[template] || 'professional' : 'professional';
-      const filename = `${template ? template.toLowerCase().replace(/\s+/g, '-') : 'professional'}-invoice.pdf`;
+      const templateId = template || 'professional';
+      const filename = `${templateId}-invoice.pdf`;
       
       const result = await generateInvoicePDF(invoiceData, filename, templateId);
       

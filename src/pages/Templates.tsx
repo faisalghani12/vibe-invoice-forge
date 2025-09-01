@@ -42,8 +42,8 @@ const Templates = () => {
     setIsPreviewOpen(true);
   };
 
-  const handleCustomize = (templateName: string) => {
-    setSelectedTemplate(templateName);
+  const handleCustomize = (templateId: string) => {
+    setSelectedTemplate(templateId);
     setIsEditorOpen(true);
   };
 
@@ -295,7 +295,7 @@ const Templates = () => {
                 <Button 
                   size="sm" 
                   className="flex-1 justify-center"
-                  onClick={() => handleCustomize(template.name)}
+                  onClick={() => handleCustomize(template.templateId)}
                 >
                   <Edit className="w-4 h-4" />
                   Customize
@@ -348,7 +348,7 @@ const Templates = () => {
                   <Button 
                     onClick={() => {
                       setIsPreviewOpen(false);
-                      handleCustomize(previewTemplate.name);
+                      handleCustomize(previewTemplate.templateId);
                     }}
                     className="flex-1"
                   >
@@ -367,7 +367,7 @@ const Templates = () => {
         <DialogContent className="max-w-[95vw] max-h-[95vh] overflow-auto">
           <DialogHeader>
             <DialogTitle>
-              {selectedTemplate ? `Customize ${selectedTemplate}` : 'Create Invoice'}
+              {selectedTemplate ? `Customize Template` : 'Create Invoice'}
             </DialogTitle>
           </DialogHeader>
           <InvoiceEditor 
