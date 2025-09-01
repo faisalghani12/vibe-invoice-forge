@@ -19,6 +19,12 @@ import minimalistTemplate from "@/assets/template-minimalist.jpg";
 import techTemplate from "@/assets/template-tech.jpg";
 import consultingTemplate from "@/assets/template-consulting.jpg";
 import ecommerceTemplate from "@/assets/template-ecommerce.jpg";
+import medicalTemplate from "@/assets/template-medical.jpg";
+import legalTemplate from "@/assets/template-legal.jpg";
+import fitnessTemplate from "@/assets/template-fitness.jpg";
+import restaurantTemplate from "@/assets/template-restaurant.jpg";
+import realestateTemplate from "@/assets/template-realestate.jpg";
+import photographyTemplate from "@/assets/template-photography.jpg";
 
 /**
  * Templates page showcasing all available invoice templates
@@ -107,6 +113,72 @@ const Templates = () => {
       preview: ecommerceTemplate,
       tags: ["Retail", "Product", "Sales"],
       price: "Premium"
+    },
+    {
+      id: 7,
+      templateId: "medical",
+      name: "Medical & Healthcare",
+      category: "Healthcare",
+      rating: 4.9,
+      downloads: 13450,
+      preview: medicalTemplate,
+      tags: ["Healthcare", "Medical", "Clean"],
+      price: "Free"
+    },
+    {
+      id: 8,
+      templateId: "legal",
+      name: "Legal Services",
+      category: "Legal",
+      rating: 4.8,
+      downloads: 8920,
+      preview: legalTemplate,
+      tags: ["Legal", "Professional", "Formal"],
+      price: "Premium"
+    },
+    {
+      id: 9,
+      templateId: "fitness",
+      name: "Fitness & Wellness",
+      category: "Fitness",
+      rating: 4.6,
+      downloads: 10350,
+      preview: fitnessTemplate,
+      tags: ["Fitness", "Wellness", "Energetic"],
+      price: "Free"
+    },
+    {
+      id: 10,
+      templateId: "restaurant",
+      name: "Restaurant & Food",
+      category: "Food",
+      rating: 4.7,
+      downloads: 9840,
+      preview: restaurantTemplate,
+      tags: ["Restaurant", "Food", "Elegant"],
+      price: "Premium"
+    },
+    {
+      id: 11,
+      templateId: "realestate",
+      name: "Real Estate",
+      category: "Property",
+      rating: 4.8,
+      downloads: 11670,
+      preview: realestateTemplate,
+      tags: ["Property", "Real Estate", "Professional"],
+      price: "Free"
+    },
+    {
+      id: 12,
+      templateId: "photography",
+      name: "Photography & Creative",
+      category: "Photography",
+      rating: 4.9,
+      downloads: 14230,
+      preview: photographyTemplate,
+      tags: ["Photography", "Creative", "Artistic"],
+      price: "Premium"
     }
   ];
 
@@ -145,6 +217,12 @@ const Templates = () => {
               <SelectItem value="technology">Technology</SelectItem>
               <SelectItem value="professional">Professional</SelectItem>
               <SelectItem value="retail">Retail</SelectItem>
+              <SelectItem value="healthcare">Healthcare</SelectItem>
+              <SelectItem value="legal">Legal</SelectItem>
+              <SelectItem value="fitness">Fitness</SelectItem>
+              <SelectItem value="food">Food</SelectItem>
+              <SelectItem value="property">Property</SelectItem>
+              <SelectItem value="photography">Photography</SelectItem>
             </SelectContent>
           </Select>
           <Select>

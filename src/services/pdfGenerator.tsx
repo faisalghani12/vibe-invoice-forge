@@ -219,6 +219,221 @@ const ecommerceStyles = StyleSheet.create({
   },
 });
 
+// Medical template styles
+const medicalStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#FFFFFF',
+    padding: 35,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 40,
+    borderBottom: 2,
+    borderBottomColor: '#2563EB',
+    paddingBottom: 20,
+  },
+  logo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#2563EB',
+  },
+  companyInfo: {
+    fontSize: 10,
+    color: '#64748B',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#1E40AF',
+    marginBottom: 10,
+  },
+});
+
+// Legal template styles
+const legalStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#FFFFFF',
+    padding: 40,
+    fontFamily: 'Times-Roman',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 45,
+    borderBottom: 3,
+    borderBottomColor: '#1E3A8A',
+    paddingBottom: 25,
+  },
+  logo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1E3A8A',
+  },
+  companyInfo: {
+    fontSize: 10,
+    color: '#374151',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#1E3A8A',
+    marginBottom: 15,
+  },
+});
+
+// Fitness template styles
+const fitnessStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#FFFFFF',
+    padding: 30,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 40,
+    borderBottom: 3,
+    borderBottomColor: '#EA580C',
+    paddingBottom: 20,
+    backgroundColor: '#FFF7ED',
+    padding: 20,
+    marginTop: -30,
+    marginLeft: -30,
+    marginRight: -30,
+  },
+  logo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#EA580C',
+  },
+  companyInfo: {
+    fontSize: 10,
+    color: '#9A3412',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#EA580C',
+    marginBottom: 10,
+  },
+});
+
+// Restaurant template styles
+const restaurantStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#FEF7F0',
+    padding: 35,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 40,
+    borderBottom: 2,
+    borderBottomColor: '#92400E',
+    paddingBottom: 20,
+  },
+  logo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#92400E',
+  },
+  companyInfo: {
+    fontSize: 10,
+    color: '#78350F',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#92400E',
+    marginBottom: 10,
+  },
+});
+
+// Real Estate template styles
+const realestateStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#FFFFFF',
+    padding: 35,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 40,
+    borderBottom: 2,
+    borderBottomColor: '#16A34A',
+    paddingBottom: 20,
+  },
+  logo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#16A34A',
+  },
+  companyInfo: {
+    fontSize: 10,
+    color: '#4B5563',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#15803D',
+    marginBottom: 10,
+  },
+});
+
+// Photography template styles
+const photographyStyles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#1F2937',
+    padding: 35,
+    fontFamily: 'Helvetica',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 40,
+    borderBottom: 1,
+    borderBottomColor: '#FFFFFF',
+    paddingBottom: 20,
+  },
+  logo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+  companyInfo: {
+    fontSize: 10,
+    color: '#D1D5DB',
+    textAlign: 'right',
+  },
+  invoiceTitle: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 10,
+  },
+});
+
 // Common styles for all templates (shared components)
 const getCommonStyles = (primaryColor: string, backgroundColor: string = '#FFFFFF', textColor: string = '#1F2937') => StyleSheet.create({
   invoiceNumber: {
@@ -373,6 +588,36 @@ const getTemplateStyles = (templateId: string) => {
       main: ecommerceStyles, 
       common: getCommonStyles('#059669'), 
       colors: { primary: '#059669', bg: '#FFFFFF', text: '#1F2937' } 
+    },
+    medical: { 
+      main: medicalStyles, 
+      common: getCommonStyles('#2563EB'), 
+      colors: { primary: '#2563EB', bg: '#FFFFFF', text: '#1F2937' } 
+    },
+    legal: { 
+      main: legalStyles, 
+      common: getCommonStyles('#1E3A8A'), 
+      colors: { primary: '#1E3A8A', bg: '#FFFFFF', text: '#1F2937' } 
+    },
+    fitness: { 
+      main: fitnessStyles, 
+      common: getCommonStyles('#EA580C'), 
+      colors: { primary: '#EA580C', bg: '#FFFFFF', text: '#1F2937' } 
+    },
+    restaurant: { 
+      main: restaurantStyles, 
+      common: getCommonStyles('#92400E', '#FEF7F0'), 
+      colors: { primary: '#92400E', bg: '#FEF7F0', text: '#1F2937' } 
+    },
+    realestate: { 
+      main: realestateStyles, 
+      common: getCommonStyles('#16A34A'), 
+      colors: { primary: '#16A34A', bg: '#FFFFFF', text: '#1F2937' } 
+    },
+    photography: { 
+      main: photographyStyles, 
+      common: getCommonStyles('#FFFFFF', '#1F2937', '#FFFFFF'), 
+      colors: { primary: '#FFFFFF', bg: '#1F2937', text: '#FFFFFF' } 
     },
   };
   
