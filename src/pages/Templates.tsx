@@ -35,6 +35,9 @@ const Templates = () => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [previewTemplate, setPreviewTemplate] = useState<any>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedPrice, setSelectedPrice] = useState("all");
   const { toast } = useToast();
 
   const handlePreview = (template: any) => {
@@ -182,6 +185,21 @@ const Templates = () => {
     }
   ];
 
+  // Filter templates based on search query, category, and price
+  const filteredTemplates = templates.filter(template => {
+    const matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         template.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         template.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesCategory = selectedCategory === "all" || 
+                           template.category.toLowerCase() === selectedCategory.toLowerCase();
+    
+    const matchesPrice = selectedPrice === "all" || 
+                        template.price.toLowerCase() === selectedPrice.toLowerCase();
+    
+    return matchesSearch && matchesCategory && matchesPrice;
+  });
+
   return (
     <div className="p-6 space-y-8 animate-fade-in">
       {/* Header */}
@@ -202,10 +220,12 @@ const Templates = () => {
           <Input 
             placeholder="Search templates..." 
             className="pl-10"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <div className="flex gap-4">
-          <Select>
+          <Select value={selectedCategory} onValueChange={setSelectedCategory}>
             <SelectTrigger className="w-[180px]">
               <Filter className="w-4 h-4 mr-2" />
               <SelectValue placeholder="Category" />
@@ -225,7 +245,7 @@ const Templates = () => {
               <SelectItem value="photography">Photography</SelectItem>
             </SelectContent>
           </Select>
-          <Select>
+          <Select value={selectedPrice} onValueChange={setSelectedPrice}>
             <SelectTrigger className="w-[140px]">
               <SelectValue placeholder="Price" />
             </SelectTrigger>
@@ -240,7 +260,8 @@ const Templates = () => {
 
         {/* Templates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {templates.map((template) => (
+          {filteredTemplates.length > 0 ? (
+            filteredTemplates.map((template) => (
             <Card key={template.id} className="overflow-hidden hover:shadow-elegant transition-shadow">
               <CardHeader className="p-0">
                 <div className="aspect-[4/3] bg-muted relative overflow-hidden">
@@ -302,7 +323,23 @@ const Templates = () => {
                 </Button>
               </CardFooter>
             </Card>
-          ))}
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground text-lg">No templates found matching your criteria.</p>
+              <Button 
+                variant="outline" 
+                className="mt-4"
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedCategory("all");
+                  setSelectedPrice("all");
+                }}
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )}
         </div>
         
         {/* Load More */}

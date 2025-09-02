@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ToolCard } from "@/components/ToolCard";
@@ -14,10 +14,19 @@ import {
   Camera,
   BarChart3
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const query = searchParams.get('search');
+    if (query) {
+      setSearchQuery(query);
+    }
+  }, [searchParams]);
 
   const tools = [
     {
@@ -112,6 +121,14 @@ const Index = () => {
     }
   ];
 
+  // Filter tools based on search query
+  const filteredTools = tools.filter(tool => {
+    if (!searchQuery) return true;
+    return tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           tool.features.some(feature => feature.toLowerCase().includes(searchQuery.toLowerCase()));
+  });
+
   const stats = [
     { label: "Invoices Generated", value: "12,450+", icon: FileText },
     { label: "Active Users", value: "3,200+", icon: Users },
@@ -165,16 +182,38 @@ const Index = () => {
       {/* Tools Grid */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-foreground">Available Tools</h2>
+          <h2 className="text-2xl font-bold text-foreground">
+            {searchQuery ? `Search Results for "${searchQuery}"` : "Available Tools"}
+          </h2>
           <Button variant="outline" onClick={() => navigate("/get-started")}>
             <Clock className="w-4 h-4 mr-2" />
             Get Started Guide
           </Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tools.map((tool, index) => (
-            <ToolCard key={index} {...tool} />
-          ))}
+          {filteredTools.length > 0 ? (
+            filteredTools.map((tool, index) => (
+              <ToolCard key={index} {...tool} />
+            ))
+          ) : searchQuery ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground text-lg">No tools found matching "{searchQuery}"</p>
+              <Button 
+                variant="outline" 
+                className="mt-4"
+                onClick={() => {
+                  setSearchQuery("");
+                  navigate("/");
+                }}
+              >
+                Clear Search
+              </Button>
+            </div>
+          ) : (
+            tools.map((tool, index) => (
+              <ToolCard key={index} {...tool} />
+            ))
+          )}
         </div>
       </div>
 

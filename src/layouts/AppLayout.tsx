@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Bell, Search, User, FileText, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 interface AppLayoutProps {
   children: React.ReactNode;
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [toolsSearchQuery, setToolsSearchQuery] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navLinks = [
     { to: "/", label: "Home" },
@@ -20,6 +22,15 @@ export function AppLayout({ children }: AppLayoutProps) {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleToolsSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && toolsSearchQuery.trim()) {
+      // Navigate to homepage with search parameter
+      navigate(`/?search=${encodeURIComponent(toolsSearchQuery.trim())}`);
+      setToolsSearchQuery("");
+      setMobileMenuOpen(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -58,6 +69,9 @@ export function AppLayout({ children }: AppLayoutProps) {
               <Input 
                 placeholder="Search tools..." 
                 className="pl-10 bg-muted/30 w-full"
+                value={toolsSearchQuery}
+                onChange={(e) => setToolsSearchQuery(e.target.value)}
+                onKeyDown={handleToolsSearch}
               />
             </div>
             
@@ -102,6 +116,9 @@ export function AppLayout({ children }: AppLayoutProps) {
                   <Input 
                     placeholder="Search tools..." 
                     className="pl-10 bg-muted/30"
+                    value={toolsSearchQuery}
+                    onChange={(e) => setToolsSearchQuery(e.target.value)}
+                    onKeyDown={handleToolsSearch}
                   />
                 </div>
               </div>
