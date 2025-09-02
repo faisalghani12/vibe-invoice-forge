@@ -63,15 +63,15 @@ const Index = () => {
       title: "Receipt Scanner",
       description: "Scan and digitize receipts with AI-powered extraction",
       icon: Camera,
-      status: "coming-soon" as const,
+      status: "available" as const,
       features: [
         "AI text extraction",
         "Auto categorization",
-        "Cloud storage",
-        "Export to CSV/Excel"
+        "Data parsing",
+        "Export to CSV"
       ],
-      onAction: () => {},
-      actionLabel: "Coming Soon",
+      onAction: () => navigate("/receipt-scanner"),
+      actionLabel: "Scan Receipt",
       gradient: "bg-gradient-to-br from-blue-500 to-cyan-600"
     },
     {
