@@ -121,12 +121,13 @@ const Index = () => {
     }
   ];
 
-  // Filter tools based on search query
+  // Filter tools based on search query with case insensitive partial matching
   const filteredTools = tools.filter(tool => {
     if (!searchQuery) return true;
-    return tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           tool.features.some(feature => feature.toLowerCase().includes(searchQuery.toLowerCase()));
+    const query = searchQuery.toLowerCase().trim();
+    return tool.title.toLowerCase().includes(query) ||
+           tool.description.toLowerCase().includes(query) ||
+           tool.features.some(feature => feature.toLowerCase().includes(query));
   });
 
   const stats = [
@@ -185,11 +186,32 @@ const Index = () => {
           <h2 className="text-2xl font-bold text-foreground">
             {searchQuery ? `Search Results for "${searchQuery}"` : "Available Tools"}
           </h2>
-          <Button variant="outline" onClick={() => navigate("/get-started")}>
-            <Clock className="w-4 h-4 mr-2" />
-            Get Started Guide
-          </Button>
+          <div className="flex gap-2">
+            {searchQuery && (
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => {
+                  setSearchQuery("");
+                  navigate("/");
+                }}
+              >
+                Clear Search
+              </Button>
+            )}
+            <Button variant="outline" onClick={() => navigate("/get-started")}>
+              <Clock className="w-4 h-4 mr-2" />
+              Get Started Guide
+            </Button>
+          </div>
         </div>
+        
+        {searchQuery && (
+          <div className="text-sm text-muted-foreground">
+            Showing {filteredTools.length} of {tools.length} tools
+          </div>
+        )}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTools.length > 0 ? (
             filteredTools.map((tool, index) => (
@@ -198,16 +220,9 @@ const Index = () => {
           ) : searchQuery ? (
             <div className="col-span-full text-center py-12">
               <p className="text-muted-foreground text-lg">No tools found matching "{searchQuery}"</p>
-              <Button 
-                variant="outline" 
-                className="mt-4"
-                onClick={() => {
-                  setSearchQuery("");
-                  navigate("/");
-                }}
-              >
-                Clear Search
-              </Button>
+              <p className="text-sm text-muted-foreground mt-2">
+                Try searching with different keywords or check your spelling
+              </p>
             </div>
           ) : (
             tools.map((tool, index) => (
