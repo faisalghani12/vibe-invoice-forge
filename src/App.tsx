@@ -12,6 +12,7 @@ import ApiDocs from "./pages/ApiDocs";
 import SignIn from "./pages/SignIn";
 import GetStarted from "./pages/GetStarted";
 import ReceiptScanner from "./pages/ReceiptScanner";
+import FinancialReportGenerator from "./pages/FinancialReportGenerator";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/api-docs" element={<ApiDocs />} />
             <Route path="/receipt-scanner" element={<ReceiptScanner />} />
+            <Route path="/financial-reports" element={<FinancialReportGenerator />} />
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/get-started" element={<GetStarted />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

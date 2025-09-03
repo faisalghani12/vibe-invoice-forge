@@ -75,6 +75,21 @@ const Index = () => {
       gradient: "bg-gradient-to-br from-blue-500 to-cyan-600"
     },
     {
+      title: "Financial Report Generator",
+      description: "Create comprehensive financial reports and analytics",
+      icon: BarChart3,
+      status: "available" as const,
+      features: [
+        "Income statements",
+        "Profit & loss reports",
+        "Expense tracking",
+        "Professional formatting"
+      ],
+      onAction: () => navigate("/financial-reports"),
+      actionLabel: "Generate Report",
+      gradient: "bg-gradient-to-br from-purple-500 to-blue-600"
+    },
+    {
       title: "Financial Analytics",
       description: "Track and analyze your financial performance",
       icon: BarChart3,
