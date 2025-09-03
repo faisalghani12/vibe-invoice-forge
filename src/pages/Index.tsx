@@ -90,6 +90,21 @@ const Index = () => {
       gradient: "bg-gradient-to-br from-purple-500 to-blue-600"
     },
     {
+      title: "Advanced Profit/Loss Calculator",
+      description: "Calculate profits with break-even analysis and scenario planning",
+      icon: TrendingUp,
+      status: "available" as const,
+      features: [
+        "Break-even analysis",
+        "Scenario planning",
+        "Sensitivity analysis",
+        "Interactive charts"
+      ],
+      onAction: () => navigate("/profit-loss-calculator"),
+      actionLabel: "Calculate P&L",
+      gradient: "bg-gradient-to-br from-green-500 to-teal-600"
+    },
+    {
       title: "Financial Analytics",
       description: "Track and analyze your financial performance",
       icon: BarChart3,
