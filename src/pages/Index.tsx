@@ -12,7 +12,8 @@ import {
   Clock,
   Zap,
   Camera,
-  BarChart3
+  BarChart3,
+  Brain
 } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -103,6 +104,21 @@ const Index = () => {
       onAction: () => navigate("/profit-loss-calculator"),
       actionLabel: "Calculate P&L",
       gradient: "bg-gradient-to-br from-green-500 to-teal-600"
+    },
+    {
+      title: "Predictive Insights",
+      description: "AI-powered financial forecasting and predictive analytics",
+      icon: Brain,
+      status: "available" as const,
+      features: [
+        "Revenue forecasting",
+        "Cash flow predictions",
+        "Market trend analysis",
+        "AI-driven insights"
+      ],
+      onAction: () => navigate("/predictive-insights"),
+      actionLabel: "View Insights",
+      gradient: "bg-gradient-to-br from-indigo-500 to-purple-600"
     },
     {
       title: "Financial Analytics",
