@@ -137,6 +137,21 @@ const Index = () => {
       gradient: "bg-gradient-to-br from-violet-500 to-purple-600"
     },
     {
+      title: "Investment Tracker",
+      description: "Multi-asset dashboard for tracking portfolio performance across all investments",
+      icon: TrendingUp,
+      status: "available" as const,
+      features: [
+        "Multi-asset tracking",
+        "Portfolio analytics",
+        "Performance charts",
+        "Real-time updates"
+      ],
+      onAction: () => navigate("/investment-tracker"),
+      actionLabel: "Track Investments",
+      gradient: "bg-gradient-to-br from-emerald-500 to-teal-600"
+    },
+    {
       title: "Financial Analytics",
       description: "Track and analyze your financial performance",
       icon: BarChart3,
