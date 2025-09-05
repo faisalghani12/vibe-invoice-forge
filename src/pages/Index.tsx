@@ -13,7 +13,8 @@ import {
   Zap,
   Camera,
   BarChart3,
-  Brain
+  Brain,
+  Building2
 } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -119,6 +120,21 @@ const Index = () => {
       onAction: () => navigate("/predictive-insights"),
       actionLabel: "View Insights",
       gradient: "bg-gradient-to-br from-indigo-500 to-purple-600"
+    },
+    {
+      title: "Business Valuation Tool",
+      description: "Estimate business value using multiple proven valuation methods",
+      icon: Building2,
+      status: "available" as const,
+      features: [
+        "Asset-based valuation",
+        "DCF analysis",
+        "Market multiples",
+        "Comprehensive reports"
+      ],
+      onAction: () => navigate("/valuation-tool"),
+      actionLabel: "Value Business",
+      gradient: "bg-gradient-to-br from-violet-500 to-purple-600"
     },
     {
       title: "Financial Analytics",
