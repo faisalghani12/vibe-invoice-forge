@@ -279,41 +279,95 @@ ${letterData.senderTitle}`;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 p-4">
-      <div className="mx-auto max-w-7xl space-y-8">
+    <div className="min-h-screen bg-hero-gradient p-4 relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0di00aC0ydjRoLTR2Mmg0djRoMnYtNGg0di0yaC00em0wLTMwVjBoLTJ2NGgtNHYyaDR2NGgyVjZoNFY0aC00ek02IDM0di00SDR2NEgwdjJoNHY0aDJ2LTRoNHYtMkg2ek02IDRWMEg0djRIMHYyaDR2NGgyVjZoNFY0SDZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
+      
+      <div className="mx-auto max-w-7xl space-y-12 relative z-10">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-primary/10 rounded-full">
-            <FileText className="h-6 w-6 text-primary" />
-            <span className="font-semibold text-primary">Business Letter Generator</span>
+        <div className="text-center space-y-8 pt-8">
+          <div className="inline-flex items-center gap-4 px-8 py-4 bg-card/90 backdrop-blur-sm rounded-2xl shadow-elegant border border-border/20">
+            <div className="p-3 bg-primary-gradient rounded-xl shadow-glow">
+              <FileText className="h-8 w-8 text-primary-foreground" />
+            </div>
+            <div className="text-left">
+              <span className="text-2xl font-bold bg-primary-gradient bg-clip-text text-transparent">
+                Business Letter Generator
+              </span>
+              <p className="text-muted-foreground text-sm">AI-Powered Professional Letters</p>
+            </div>
           </div>
-          <h1 className="text-4xl font-bold">Create Professional Business Letters</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Generate professional business correspondence with our easy-to-use templates and customization tools.
-          </p>
+          
+          <div className="space-y-6">
+            <h1 className="text-6xl font-bold text-primary-foreground leading-tight">
+              Create
+              <span className="block bg-surface-gradient bg-clip-text text-transparent">
+                Professional Letters
+              </span>
+              <span className="text-4xl text-primary-foreground/80">in Seconds</span>
+            </h1>
+            <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed">
+              Transform your business communication with our intelligent letter generator. 
+              Choose from expertly crafted templates and customize every detail for perfect professional correspondence.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center gap-8 pt-4">
+            <div className="flex items-center gap-2 text-primary-foreground/80">
+              <div className="w-2 h-2 bg-primary-foreground rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium">5+ Professional Templates</span>
+            </div>
+            <div className="flex items-center gap-2 text-primary-foreground/80">
+              <div className="w-2 h-2 bg-primary-foreground rounded-full animate-pulse [animation-delay:0.5s]"></div>
+              <span className="text-sm font-medium">Instant PDF Export</span>
+            </div>
+            <div className="flex items-center gap-2 text-primary-foreground/80">
+              <div className="w-2 h-2 bg-primary-foreground rounded-full animate-pulse [animation-delay:1s]"></div>
+              <span className="text-sm font-medium">No Backend Required</span>
+            </div>
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-3 gap-8">
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-8">
           {/* Input Form */}
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Letter Details</CardTitle>
-                <CardDescription>
-                  Choose a template and fill in your information
-                </CardDescription>
+          <div className="lg:col-span-2 space-y-6">
+            <Card className="bg-card/95 backdrop-blur-sm shadow-card border-border/20 hover:shadow-elegant transition-all duration-300">
+              <CardHeader className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <FileText className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl">Letter Template</CardTitle>
+                    <CardDescription className="text-muted-foreground/80">
+                      Choose from our collection of professional templates
+                    </CardDescription>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="template">Letter Template</Label>
+                  <Label htmlFor="template" className="text-sm font-medium text-foreground/90">
+                    Template Type
+                  </Label>
                   <Select value={letterData.template} onValueChange={handleTemplateChange}>
-                    <SelectTrigger>
+                    <SelectTrigger className="mt-2 h-12 border-border/40 bg-background/50 hover:border-primary/20 transition-colors">
                       <SelectValue placeholder="Select a letter template" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-card/95 backdrop-blur-sm border-border/20">
                       {Object.entries(letterTemplates).map(([key, template]) => (
-                        <SelectItem key={key} value={key}>
-                          {template.name}
+                        <SelectItem 
+                          key={key} 
+                          value={key}
+                          className="hover:bg-primary/5 focus:bg-primary/10 cursor-pointer"
+                        >
+                          <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 bg-primary rounded-full"></div>
+                            {template.name}
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -322,157 +376,205 @@ ${letterData.senderTitle}`;
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Sender Information</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+            <Card className="bg-card/95 backdrop-blur-sm shadow-card border-border/20 hover:shadow-elegant transition-all duration-300 group">
+              <CardHeader className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/15 transition-colors">
+                    <svg className="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
                   <div>
-                    <Label htmlFor="senderName">Your Name</Label>
+                    <CardTitle className="text-xl">Sender Information</CardTitle>
+                    <CardDescription className="text-muted-foreground/80">
+                      Your contact details and professional information
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="senderName" className="text-sm font-medium text-foreground/90">Your Name</Label>
                     <Input
                       id="senderName"
                       value={letterData.senderName}
                       onChange={(e) => handleInputChange('senderName', e.target.value)}
                       placeholder="John Doe"
+                      className="h-11 border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="senderTitle">Your Title</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="senderTitle" className="text-sm font-medium text-foreground/90">Your Title</Label>
                     <Input
                       id="senderTitle"
                       value={letterData.senderTitle}
                       onChange={(e) => handleInputChange('senderTitle', e.target.value)}
                       placeholder="Marketing Manager"
+                      className="h-11 border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all"
                     />
                   </div>
                 </div>
-                <div>
-                  <Label htmlFor="senderCompany">Your Company</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="senderCompany" className="text-sm font-medium text-foreground/90">Your Company</Label>
                   <Input
                     id="senderCompany"
                     value={letterData.senderCompany}
                     onChange={(e) => handleInputChange('senderCompany', e.target.value)}
                     placeholder="ABC Corporation"
+                    className="h-11 border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="senderAddress">Your Address</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="senderAddress" className="text-sm font-medium text-foreground/90">Your Address</Label>
                   <Textarea
                     id="senderAddress"
                     value={letterData.senderAddress}
                     onChange={(e) => handleInputChange('senderAddress', e.target.value)}
                     placeholder="123 Business St., Suite 100&#10;City, State 12345"
                     rows={3}
+                    className="border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all resize-none"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="senderPhone">Phone Number</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="senderPhone" className="text-sm font-medium text-foreground/90">Phone Number</Label>
                     <Input
                       id="senderPhone"
                       value={letterData.senderPhone}
                       onChange={(e) => handleInputChange('senderPhone', e.target.value)}
                       placeholder="(555) 123-4567"
+                      className="h-11 border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="senderEmail">Email Address</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="senderEmail" className="text-sm font-medium text-foreground/90">Email Address</Label>
                     <Input
                       id="senderEmail"
                       type="email"
                       value={letterData.senderEmail}
                       onChange={(e) => handleInputChange('senderEmail', e.target.value)}
                       placeholder="john.doe@company.com"
+                      className="h-11 border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all"
                     />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Recipient Information</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+            <Card className="bg-card/95 backdrop-blur-sm shadow-card border-border/20 hover:shadow-elegant transition-all duration-300 group">
+              <CardHeader className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/15 transition-colors">
+                    <svg className="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
                   <div>
-                    <Label htmlFor="recipientName">Recipient Name</Label>
+                    <CardTitle className="text-xl">Recipient Information</CardTitle>
+                    <CardDescription className="text-muted-foreground/80">
+                      Details of the person or organization receiving the letter
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="recipientName" className="text-sm font-medium text-foreground/90">Recipient Name</Label>
                     <Input
                       id="recipientName"
                       value={letterData.recipientName}
                       onChange={(e) => handleInputChange('recipientName', e.target.value)}
                       placeholder="Jane Smith"
+                      className="h-11 border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="recipientTitle">Recipient Title</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="recipientTitle" className="text-sm font-medium text-foreground/90">Recipient Title</Label>
                     <Input
                       id="recipientTitle"
                       value={letterData.recipientTitle}
                       onChange={(e) => handleInputChange('recipientTitle', e.target.value)}
                       placeholder="Director of Operations"
+                      className="h-11 border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all"
                     />
                   </div>
                 </div>
-                <div>
-                  <Label htmlFor="recipientCompany">Recipient Company</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="recipientCompany" className="text-sm font-medium text-foreground/90">Recipient Company</Label>
                   <Input
                     id="recipientCompany"
                     value={letterData.recipientCompany}
                     onChange={(e) => handleInputChange('recipientCompany', e.target.value)}
                     placeholder="XYZ Industries"
+                    className="h-11 border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="recipientAddress">Recipient Address</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="recipientAddress" className="text-sm font-medium text-foreground/90">Recipient Address</Label>
                   <Textarea
                     id="recipientAddress"
                     value={letterData.recipientAddress}
                     onChange={(e) => handleInputChange('recipientAddress', e.target.value)}
                     placeholder="456 Corporate Blvd.&#10;Business City, State 67890"
                     rows={3}
+                    className="border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all resize-none"
                   />
                 </div>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Letter Content</CardTitle>
+            <Card className="bg-card/95 backdrop-blur-sm shadow-card border-border/20 hover:shadow-elegant transition-all duration-300 group">
+              <CardHeader className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/15 transition-colors">
+                    <svg className="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl">Letter Content</CardTitle>
+                    <CardDescription className="text-muted-foreground/80">
+                      Customize the subject, body, and closing of your letter
+                    </CardDescription>
+                  </div>
+                </div>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <Label htmlFor="subject">Subject</Label>
+              <CardContent className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="subject" className="text-sm font-medium text-foreground/90">Subject</Label>
                   <Input
                     id="subject"
                     value={letterData.subject}
                     onChange={(e) => handleInputChange('subject', e.target.value)}
                     placeholder="Enter the letter subject"
+                    className="h-11 border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="body">Letter Body</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="body" className="text-sm font-medium text-foreground/90">Letter Body</Label>
                   <Textarea
                     id="body"
                     value={letterData.body}
                     onChange={(e) => handleInputChange('body', e.target.value)}
                     placeholder="Enter the main content of your letter..."
                     rows={12}
+                    className="border-border/40 bg-background/50 hover:border-primary/20 focus:border-primary/40 transition-all resize-none min-h-[200px]"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="closing">Closing</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="closing" className="text-sm font-medium text-foreground/90">Closing</Label>
                   <Select value={letterData.closing} onValueChange={(value) => handleInputChange('closing', value)}>
-                    <SelectTrigger>
+                    <SelectTrigger className="h-11 border-border/40 bg-background/50 hover:border-primary/20 transition-colors">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Sincerely">Sincerely</SelectItem>
-                      <SelectItem value="Best regards">Best regards</SelectItem>
-                      <SelectItem value="Respectfully">Respectfully</SelectItem>
-                      <SelectItem value="Thank you">Thank you</SelectItem>
-                      <SelectItem value="Yours truly">Yours truly</SelectItem>
+                    <SelectContent className="bg-card/95 backdrop-blur-sm border-border/20">
+                      <SelectItem value="Sincerely" className="hover:bg-primary/5 focus:bg-primary/10 cursor-pointer">Sincerely</SelectItem>
+                      <SelectItem value="Best regards" className="hover:bg-primary/5 focus:bg-primary/10 cursor-pointer">Best regards</SelectItem>
+                      <SelectItem value="Respectfully" className="hover:bg-primary/5 focus:bg-primary/10 cursor-pointer">Respectfully</SelectItem>
+                      <SelectItem value="Thank you" className="hover:bg-primary/5 focus:bg-primary/10 cursor-pointer">Thank you</SelectItem>
+                      <SelectItem value="Yours truly" className="hover:bg-primary/5 focus:bg-primary/10 cursor-pointer">Yours truly</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -482,55 +584,88 @@ ${letterData.senderTitle}`;
 
           {/* Preview and Actions */}
           <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Letter Preview</CardTitle>
-                <CardDescription>
-                  Preview your letter before generating the final version
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-muted/30 p-6 rounded-lg border">
-                  <pre className="whitespace-pre-wrap text-sm font-mono leading-relaxed">
-                    {generateLetter()}
-                  </pre>
+            <Card className="bg-card/95 backdrop-blur-sm shadow-elegant border-border/20 sticky top-6">
+              <CardHeader className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <svg className="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl">Live Preview</CardTitle>
+                    <CardDescription className="text-muted-foreground/80">
+                      Real-time preview of your professional letter
+                    </CardDescription>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Export Options</CardTitle>
-                <CardDescription>
-                  Choose how you want to save or share your letter
-                </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 gap-3">
-                  <Button 
-                    onClick={copyToClipboard} 
-                    variant="outline" 
-                    className="w-full justify-start"
-                  >
-                    <Copy className="mr-2 h-4 w-4" />
-                    Copy to Clipboard
-                  </Button>
-                  <Button 
-                    onClick={printLetter} 
-                    variant="outline" 
-                    className="w-full justify-start"
-                  >
-                    <Printer className="mr-2 h-4 w-4" />
-                    Print Letter
-                  </Button>
-                  <Button 
-                    onClick={downloadAsText} 
-                    variant="outline" 
-                    className="w-full justify-start"
-                  >
-                    <Download className="mr-2 h-4 w-4" />
-                    Download as Text File
-                  </Button>
+              <CardContent className="space-y-6">
+                <div className="bg-surface-gradient p-8 rounded-xl border border-border/20 shadow-inner">
+                  <div className="bg-card max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent p-6 rounded-lg shadow-sm border border-border/10">
+                    <pre className="whitespace-pre-wrap text-sm leading-relaxed font-serif text-foreground/90">
+                      {generateLetter()}
+                    </pre>
+                  </div>
+                </div>
+
+                {/* Export Actions */}
+                <div className="space-y-4">
+                  <div className="text-sm font-medium text-foreground/90 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    Export Options
+                  </div>
+                  
+                  <div className="grid grid-cols-1 gap-3">
+                    <Button 
+                      onClick={copyToClipboard} 
+                      variant="outline" 
+                      className="w-full justify-start h-12 border-border/40 bg-background/50 hover:bg-primary/5 hover:border-primary/30 transition-all group"
+                    >
+                      <Copy className="mr-3 h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
+                      <span className="font-medium">Copy to Clipboard</span>
+                    </Button>
+                    
+                    <Button 
+                      onClick={printLetter} 
+                      variant="outline" 
+                      className="w-full justify-start h-12 border-border/40 bg-background/50 hover:bg-primary/5 hover:border-primary/30 transition-all group"
+                    >
+                      <Printer className="mr-3 h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
+                      <span className="font-medium">Print Letter</span>
+                    </Button>
+                    
+                    <Button 
+                      onClick={downloadAsText} 
+                      className="w-full justify-start h-12 bg-primary-gradient hover:shadow-glow transition-all group text-primary-foreground font-medium"
+                    >
+                      <Download className="mr-3 h-4 w-4 group-hover:scale-110 transition-transform" />
+                      <span>Download as Text File</span>
+                    </Button>
+                  </div>
+
+                  {/* Quick Stats */}
+                  <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border/20">
+                    <div className="text-center space-y-1">
+                      <div className="text-2xl font-bold text-primary">
+                        {generateLetter().split('\n').length}
+                      </div>
+                      <div className="text-xs text-muted-foreground">Lines</div>
+                    </div>
+                    <div className="text-center space-y-1">
+                      <div className="text-2xl font-bold text-primary">
+                        {generateLetter().split(' ').length}
+                      </div>
+                      <div className="text-xs text-muted-foreground">Words</div>
+                    </div>
+                    <div className="text-center space-y-1">
+                      <div className="text-2xl font-bold text-primary">
+                        {generateLetter().length}
+                      </div>
+                      <div className="text-xs text-muted-foreground">Characters</div>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
