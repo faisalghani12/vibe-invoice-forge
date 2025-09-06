@@ -17,22 +17,34 @@ export const Header = () => {
               <FileText className="w-5 h-5 text-white" />
             </div>
             <div className="font-bold text-xl text-foreground">
-              FinTools<span className="text-primary">.AI</span>
+              Tools<span className="text-primary">.AI</span>
             </div>
           </Link>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link to="/templates" className="text-foreground hover:text-primary transition-colors">
+            <Link
+              to="/templates"
+              className="text-foreground hover:text-primary transition-colors"
+            >
               Templates
             </Link>
-            <a href="/#features" className="text-foreground hover:text-primary transition-colors">
+            <a
+              href="/#features"
+              className="text-foreground hover:text-primary transition-colors"
+            >
               Features
             </a>
-            <Link to="/pricing" className="text-foreground hover:text-primary transition-colors">
+            <Link
+              to="/pricing"
+              className="text-foreground hover:text-primary transition-colors"
+            >
               Pricing
             </Link>
-            <Link to="/api-docs" className="text-foreground hover:text-primary transition-colors">
+            <Link
+              to="/api-docs"
+              className="text-foreground hover:text-primary transition-colors"
+            >
               API Docs
             </Link>
           </nav>
