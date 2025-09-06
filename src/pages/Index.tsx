@@ -155,6 +155,21 @@ const Index = () => {
       gradient: "bg-gradient-to-br from-emerald-500 to-teal-600",
     },
     {
+      title: "Business Letter Generator",
+      description: "Create professional business letters with templates and customization options",
+      icon: FileText,
+      status: "available" as const,
+      features: [
+        "Professional templates",
+        "Multiple letter types",
+        "Custom formatting",
+        "PDF export",
+      ],
+      onAction: () => navigate("/business-letter-generator"),
+      actionLabel: "Generate Letter",
+      gradient: "bg-gradient-to-br from-slate-500 to-blue-600",
+    },
+    {
       title: "Financial Analytics",
       description: "Track and analyze your financial performance",
       icon: BarChart3,

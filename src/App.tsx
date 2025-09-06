@@ -17,6 +17,7 @@ import ProfitLossCalculator from "./pages/ProfitLossCalculator";
 import PredictiveInsights from "./pages/PredictiveInsights";
 import ValuationTool from "./pages/ValuationTool";
 import InvestmentTracker from "./pages/InvestmentTracker";
+import BusinessLetterGenerator from "./pages/BusinessLetterGenerator";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/predictive-insights" element={<PredictiveInsights />} />
             <Route path="/valuation-tool" element={<ValuationTool />} />
             <Route path="/investment-tracker" element={<InvestmentTracker />} />
+            <Route path="/business-letter-generator" element={<BusinessLetterGenerator />} />
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/get-started" element={<GetStarted />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
